@@ -1,0 +1,12 @@
+Atv1,Model1,40,1
+Atv2,Model2,150,1
+Atv3,Model3,75,1
+Atv4,Model4,88,0
+Atv5,Model5,32,1
+Atv6,Model6,35,0
+Atv7,Model7 Model7,44,0
+Atv8,Model8,120,0
+Atv9,Model9 Model9,150,1
+Atv10,Model10,120,1
+Atv11,Model11 Model11,250,0
+Atv12,Model12,220,0
