@@ -10,3 +10,4 @@ Atv9,Model9 Model9,150,1
 Atv10,Model10,120,1
 Atv11,Model11 Model11,250,0
 Atv12,Model12,220,0
+Atv13,Model13,121,1

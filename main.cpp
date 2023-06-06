@@ -52,7 +52,7 @@ void ReadData(std::string path, std::vector<Vehicle<int> *> &Vehicles) {
 
             token = line.substr(0, std::string::npos);
             int Available = std::stoi(token);
-            Vehicles.push_back(new Atv(Brand, Model, Power, Available));
+            Vehicles.push_back(new Atv<int>(Brand, Model, Power, Available));
         }
     }
 }
@@ -62,8 +62,8 @@ void afisare(std::string path, int argc) {
     std::vector<Vehicle<int> *> Vehicles;
     ReadData(path, Vehicles);
     for (int i = 0; i < Vehicles.size(); i++) {
-        if (dynamic_cast<Atv *>(Vehicles[i])) {
-            Atv *atv = ((Atv *) (Vehicles[i]));
+        if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+            Atv<int> *atv = ((Atv<int> *) (Vehicles[i]));
             std::cout << *atv;
         }
     }
@@ -84,10 +84,10 @@ void cautare(std::string path, int argc, char *argv[]) {
         min = std::stoi(token);
         token = strtok(NULL, "");
         max = std::stoi(token);
-        std::cout << "Atv-urile disponibile cu cai putere cuprinsi in itervalul dat sunt: " << std::endl;
+        std::cout << "Atv<int>-urile disponibile cu cai putere cuprinsi in itervalul dat sunt: " << std::endl;
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (min <= atv->GetPower() && atv->GetPower() <= max && atv->GetAvailability() == 1) {
                     std::cout << *atv;
                 }
@@ -98,10 +98,10 @@ void cautare(std::string path, int argc, char *argv[]) {
         std::cout << "CAUTARE" << std::endl << std::endl;
         std::cout << "Introduceti un interval de cai putere: ";
         std::cin >> min >> max;
-        std::cout << "Atv-urile disponibile cu cai putere cuprinsi in itervalul dat sunt: " << std::endl;
+        std::cout << "Atv<int>-urile disponibile cu cai putere cuprinsi in itervalul dat sunt: " << std::endl;
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (min <= atv->GetPower() && atv->GetPower() <= max && atv->GetAvailability() == 1) {
                     std::cout << *atv;
                 }
@@ -154,8 +154,8 @@ void Res(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
     std::string data;
     FILE *temp;
     for (int i = 0; i < Vehicles.size(); i++) {
-        if (dynamic_cast<Atv *>(Vehicles[i])) {
-            Atv *atv = ((Atv *) Vehicles[i]);
+        if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+            Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
             if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 1) {
                 exists++;
             }
@@ -167,16 +167,16 @@ void Res(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
     } else if (exists > 0) {
         temp = fopen("./Sources/temp.txt", "w");
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                     atv->SetAvailability(0);
                 }
             }
         }
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 data = atv->GetBrand() + ","
                     + atv->GetModel() + ","
                     + std::to_string(atv->GetPower()) + ","
@@ -219,8 +219,8 @@ void rezervare(std::string path, int argc, char *argv[]) {
         std::cout << "Introduceti modelul: ";
         std::getline(std::cin, Model);
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 1) {
                     exists++;
                 }
@@ -240,16 +240,16 @@ void rezervare(std::string path, int argc, char *argv[]) {
         } else if (exists > 0) {
             temp = fopen("./Sources/temp.txt", "w");
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                         atv->SetAvailability(0);
                     }
                 }
             }
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     data = atv->GetBrand() + ","
                         + atv->GetModel() + ","
                         + std::to_string(atv->GetPower()) + ","
@@ -274,8 +274,8 @@ void Imp(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
     arg = argv[count - 1];
     ora = std::stoi(arg);
     for (int i = 0; i < Vehicles.size(); i++) {
-        if (dynamic_cast<Atv *>(Vehicles[i])) {
-            Atv *atv = ((Atv *) Vehicles[i]);
+        if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+            Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
             if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 1) {
                 exists++;
             }
@@ -291,16 +291,16 @@ void Imp(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
         } else {
             temp = fopen("./Sources/temp.txt", "w");
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                         atv->SetAvailability(0);
                     }
                 }
             }
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     data = atv->GetBrand() + ","
                         + atv->GetModel() + ","
                         + std::to_string(atv->GetPower()) + ","
@@ -344,8 +344,8 @@ void imprumut(std::string path, int argc, char *argv[]) {
         std::cout << "Introduceti modelul: ";
         std::getline(std::cin, Model);
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 1) {
                     exists++;
                 }
@@ -379,16 +379,16 @@ void imprumut(std::string path, int argc, char *argv[]) {
             } else {
                 temp = fopen("./Sources/temp.txt", "w");
                 for (int i = 0; i < Vehicles.size(); i++) {
-                    if (dynamic_cast<Atv *>(Vehicles[i])) {
-                        Atv *atv = ((Atv *) Vehicles[i]);
+                    if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                        Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                         if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                             atv->SetAvailability(0);
                         }
                     }
                 }
                 for (int i = 0; i < Vehicles.size(); i++) {
-                    if (dynamic_cast<Atv *>(Vehicles[i])) {
-                        Atv *atv = ((Atv *) Vehicles[i]);
+                    if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                        Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                         data = atv->GetBrand() + ","
                             + atv->GetModel() + ","
                             + std::to_string(atv->GetPower()) + ","
@@ -412,8 +412,8 @@ void Ret(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
     int exists = 0;
     FILE *temp;
     for (int i = 0; i < Vehicles.size(); i++) {
-        if (dynamic_cast<Atv *>(Vehicles[i])) {
-            Atv *atv = ((Atv *) Vehicles[i]);
+        if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+            Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
             if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 0) {
                 exists++;
             }
@@ -425,16 +425,16 @@ void Ret(std::string path, int argc, char *argv[], std::vector<Vehicle<int> *> V
     } else if (exists > 0) {
         temp = fopen("./Sources/temp.txt", "w");
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                     atv->SetAvailability(1);
                 }
             }
         }
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 data = atv->GetBrand() + ","
                     + atv->GetModel() + ","
                     + std::to_string(atv->GetPower()) + ","
@@ -477,8 +477,8 @@ void returnare(std::string path, int argc, char *argv[]) {
         std::cout << "Introduceti modelul: ";
         std::getline(std::cin, Model);
         for (int i = 0; i < Vehicles.size(); i++) {
-            if (dynamic_cast<Atv *>(Vehicles[i])) {
-                Atv *atv = ((Atv *) Vehicles[i]);
+            if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                 if (atv->GetBrand() == Brand && atv->GetModel() == Model && atv->GetAvailability() == 0) {
                     exists++;
                 }
@@ -498,16 +498,16 @@ void returnare(std::string path, int argc, char *argv[]) {
         } else if (exists > 0) {
             temp = fopen("./Sources/temp.txt", "w");
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     if (atv->GetBrand() == Brand && atv->GetModel() == Model) {
                         atv->SetAvailability(1);
                     }
                 }
             }
             for (int i = 0; i < Vehicles.size(); i++) {
-                if (dynamic_cast<Atv *>(Vehicles[i])) {
-                    Atv *atv = ((Atv *) Vehicles[i]);
+                if (dynamic_cast<Atv<int> *>(Vehicles[i])) {
+                    Atv<int> *atv = ((Atv<int> *) Vehicles[i]);
                     data = atv->GetBrand() + ","
                         + atv->GetModel() + ","
                         + std::to_string(atv->GetPower()) + ","
